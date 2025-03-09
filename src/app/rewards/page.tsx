@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // 보상 타입 정의
 interface Reward {
@@ -247,11 +248,15 @@ export default function RewardsPage() {
                       <div className="p-6">
                         <div className="flex justify-between items-start mb-4">
                           <div className="flex items-center">
-                            <img 
-                              src={reward.image} 
-                              alt={reward.title} 
-                              className="w-12 h-12 mr-4 rounded-md"
-                            />
+                            <div className="w-12 h-12 mr-4 rounded-md relative">
+                              <Image 
+                                src={reward.image} 
+                                alt={reward.title}
+                                fill
+                                sizes="48px"
+                                className="rounded-md"
+                              />
+                            </div>
                             <div>
                               <h3 className="font-bold text-gray-800 dark:text-white">{reward.title}</h3>
                               <p className="text-sm text-gray-600 dark:text-gray-400">{reward.description}</p>
@@ -329,11 +334,14 @@ export default function RewardsPage() {
                   .filter(reward => reward.type === 'badge')
                   .map(badge => (
                     <div key={badge.id} className="text-center">
-                      <img 
-                        src={badge.image} 
-                        alt={badge.title} 
-                        className="w-16 h-16 mx-auto mb-2"
-                      />
+                      <div className="w-16 h-16 mx-auto mb-2 relative">
+                        <Image 
+                          src={badge.image} 
+                          alt={badge.title}
+                          fill
+                          sizes="64px"
+                        />
+                      </div>
                       <p className="text-xs text-gray-600 dark:text-gray-400 truncate" title={badge.title}>
                         {badge.title}
                       </p>
@@ -357,11 +365,15 @@ export default function RewardsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-dashed border-blue-300 dark:border-blue-700">
               <div className="flex items-center mb-4">
-                <img 
-                  src="/images/points.svg" 
-                  alt="미션 보상" 
-                  className="w-12 h-12 mr-4 rounded-md opacity-70"
-                />
+                <div className="w-12 h-12 mr-4 rounded-md relative opacity-70">
+                  <Image 
+                    src="/images/points.svg" 
+                    alt="미션 보상"
+                    fill
+                    sizes="48px"
+                    className="rounded-md"
+                  />
+                </div>
                 <div>
                   <h3 className="font-bold text-gray-800 dark:text-white">10,000원 상당 포인트</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">한 달 50km 달성 미션 보상</p>
@@ -374,11 +386,15 @@ export default function RewardsPage() {
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-dashed border-blue-300 dark:border-blue-700">
               <div className="flex items-center mb-4">
-                <img 
-                  src="/images/coupon-discount.svg" 
-                  alt="미션 보상" 
-                  className="w-12 h-12 mr-4 rounded-md opacity-70"
-                />
+                <div className="w-12 h-12 mr-4 rounded-md relative opacity-70">
+                  <Image 
+                    src="/images/coupon-discount.svg" 
+                    alt="미션 보상"
+                    fill
+                    sizes="48px"
+                    className="rounded-md"
+                  />
+                </div>
                 <div>
                   <h3 className="font-bold text-gray-800 dark:text-white">20% 할인 쿠폰</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">주간 10km 달성 미션 보상</p>
@@ -391,11 +407,15 @@ export default function RewardsPage() {
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-dashed border-blue-300 dark:border-blue-700">
               <div className="flex items-center mb-4">
-                <img 
-                  src="/images/badge-early-bird.svg" 
-                  alt="미션 보상" 
-                  className="w-12 h-12 mr-4 rounded-md opacity-70"
-                />
+                <div className="w-12 h-12 mr-4 rounded-md relative opacity-70">
+                  <Image 
+                    src="/images/badge-early-bird.svg" 
+                    alt="미션 보상"
+                    fill
+                    sizes="48px"
+                    className="rounded-md"
+                  />
+                </div>
                 <div>
                   <h3 className="font-bold text-gray-800 dark:text-white">얼리버드 배지</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">아침 운동 5일 연속 미션 보상</p>

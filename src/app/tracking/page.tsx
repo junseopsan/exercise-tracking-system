@@ -24,7 +24,6 @@ export default function TrackingPage() {
   const [error, setError] = useState<string | null>(null);
   const watchIdRef = useRef<number | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
 
   // 위치 권한 확인
   useEffect(() => {

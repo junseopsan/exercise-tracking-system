@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // 사용자 타입 정의
 interface User {
@@ -257,7 +258,7 @@ export default function LeaderboardPage() {
 
                 <select
                   value={rankingType}
-                  onChange={(e) => setRankingType(e.target.value as any)}
+                  onChange={(e) => setRankingType(e.target.value as 'distance' | 'missions' | 'points' | 'steps')}
                   className="px-4 py-2 rounded-md border border-gray-300 bg-white text-gray-600 text-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
                 >
                   <option value="distance">총 거리</option>
@@ -308,8 +309,14 @@ export default function LeaderboardPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img className="h-10 w-10 rounded-full" src={user.avatar} alt={user.name} />
+                        <div className="flex-shrink-0 h-10 w-10 relative">
+                          <Image 
+                            className="rounded-full"
+                            src={user.avatar}
+                            alt={user.name}
+                            fill
+                            sizes="40px"
+                          />
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900 dark:text-white">
@@ -397,7 +404,15 @@ export default function LeaderboardPage() {
                       <span className="text-sm font-medium text-gray-500 dark:text-gray-400 w-5">
                         {index + 1}
                       </span>
-                      <img className="h-8 w-8 rounded-full ml-2" src={user.avatar} alt={user.name} />
+                      <div className="h-8 w-8 relative ml-2">
+                        <Image 
+                          className="rounded-full"
+                          src={user.avatar}
+                          alt={user.name}
+                          fill
+                          sizes="32px"
+                        />
+                      </div>
                       <span className="text-sm font-medium text-gray-800 dark:text-white ml-2">
                         {user.name}
                       </span>
@@ -422,7 +437,15 @@ export default function LeaderboardPage() {
                       <span className="text-sm font-medium text-gray-500 dark:text-gray-400 w-5">
                         {index + 1}
                       </span>
-                      <img className="h-8 w-8 rounded-full ml-2" src={user.avatar} alt={user.name} />
+                      <div className="h-8 w-8 relative ml-2">
+                        <Image 
+                          className="rounded-full"
+                          src={user.avatar}
+                          alt={user.name}
+                          fill
+                          sizes="32px"
+                        />
+                      </div>
                       <span className="text-sm font-medium text-gray-800 dark:text-white ml-2">
                         {user.name}
                       </span>
@@ -447,7 +470,15 @@ export default function LeaderboardPage() {
                       <span className="text-sm font-medium text-gray-500 dark:text-gray-400 w-5">
                         {index + 1}
                       </span>
-                      <img className="h-8 w-8 rounded-full ml-2" src={user.avatar} alt={user.name} />
+                      <div className="h-8 w-8 relative ml-2">
+                        <Image 
+                          className="rounded-full"
+                          src={user.avatar}
+                          alt={user.name}
+                          fill
+                          sizes="32px"
+                        />
+                      </div>
                       <span className="text-sm font-medium text-gray-800 dark:text-white ml-2">
                         {user.name}
                       </span>
