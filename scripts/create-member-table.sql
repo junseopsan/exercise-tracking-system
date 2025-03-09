@@ -43,6 +43,10 @@ ALTER TABLE member ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public read access" ON member
   FOR SELECT USING (true);
 
+-- 모든 사용자가 member 테이블에 데이터를 삽입할 수 있도록 정책 추가
+CREATE POLICY "Allow public insert access" ON member
+  FOR INSERT WITH CHECK (true);
+
 -- 샘플 데이터 삽입
 INSERT INTO member (id, name, department, distance, rank, avatar)
 VALUES

@@ -96,15 +96,25 @@ async function createTableAndInsertData() {
 
     // 기존 테이블이 있으면 삭제
     console.log('기존 테이블 삭제 중...');
-    await supabase.rpc('drop_table_if_exists', { table_name: 'member' });
-
-    // 테이블 생성
-    console.log('새 테이블 생성 중...');
-    const { error: createError } = await supabase.rpc('create_member_table');
+    const dropTableQuery = `DROP TABLE IF EXISTS member;`;
+    const { error: dropError } = await supabase.rpc('exec', { query: dropTableQuery });
     
-    if (createError) {
-      console.error('테이블 생성 오류:', createError);
-      return;
+    if (dropError) {
+      console.error('테이블 삭제 오류:', dropError);
+      
+      // 직접 SQL 쿼리 실행
+      console.log('직접 SQL 쿼리로 테이블 생성 시도...');
+      
+      // 테이블 생성
+      console.log('새 테이블 생성 중...');
+      const { error: createTableError } = await supabase
+        .from('member')
+        .delete()
+        .neq('id', '0');
+        
+      if (createTableError && createTableError.code !== 'PGRST116') {
+        console.error('테이블 비우기 오류:', createTableError);
+      }
     }
 
     // 데이터 삽입
@@ -118,7 +128,7 @@ async function createTableAndInsertData() {
       return;
     }
 
-    console.log('테이블 생성 및 데이터 삽입 완료!');
+    console.log('데이터 삽입 완료!');
   } catch (error) {
     console.error('오류 발생:', error);
   }

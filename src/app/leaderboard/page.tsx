@@ -32,7 +32,9 @@ export default function LeaderboardPage() {
     async function fetchMembers() {
       try {
         setLoading(true);
+        console.log('데이터 로딩 시작...');
         const data = await getMembers();
+        console.log('가져온 데이터:', data);
         setMembers(data);
         setError(null);
       } catch (err) {
@@ -262,7 +264,7 @@ export default function LeaderboardPage() {
             </div>
           ) : members.length === 0 ? (
             <div className="p-8 text-center">
-              <p className="text-gray-600 dark:text-gray-400">데이터가 없습니다.</p>
+              <p className="text-gray-600 dark:text-gray-400">Supabase에 데이터가 없습니다. 샘플 데이터를 확인해주세요.</p>
             </div>
           ) : (
             <div className="overflow-x-auto">

@@ -15,15 +15,24 @@ export interface Member {
 }
 
 export async function getMembers(): Promise<Member[]> {
-  const { data, error } = await supabase
-    .from('member')
-    .select('id, name, department, distance, rank, avatar')
-    .order('rank', { ascending: true });
+  console.log('Supabase 데이터 요청 시작...');
   
-  if (error) {
-    console.error('Error fetching members:', error);
+  try {
+    const { data, error } = await supabase
+      .from('member')
+      .select('id, name, department, distance, rank, avatar')
+      .order('rank', { ascending: true });
+    
+    console.log('Supabase 응답:', { data, error });
+    
+    if (error) {
+      console.error('Error fetching members:', error);
+      return [];
+    }
+    
+    return data || [];
+  } catch (err) {
+    console.error('Supabase 요청 중 예외 발생:', err);
     return [];
   }
-  
-  return data || [];
 } 
