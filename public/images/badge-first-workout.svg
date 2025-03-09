@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <circle cx="40" cy="40" r="38" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2" />
+  <circle cx="40" cy="40" r="32" fill="#a78bfa" />
+  <path d="M40 20 L44 32 L56 32 L46 40 L50 52 L40 44 L30 52 L34 40 L24 32 L36 32 Z" fill="#f8fafc" />
+  <text x="40" y="65" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#f8fafc">첫 운동</text>
+</svg> 
