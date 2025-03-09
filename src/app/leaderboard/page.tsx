@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getMembers, Member } from '@/lib/supabase';
 
 // 사용자 타입 정의
 interface User {
@@ -22,6 +23,28 @@ export default function LeaderboardPage() {
   // 랭킹 필터 상태
   const [rankingType, setRankingType] = useState<'distance' | 'missions' | 'points' | 'steps'>('distance');
   const [timeFrame, setTimeFrame] = useState<'weekly' | 'monthly' | 'all_time'>('weekly');
+  const [members, setMembers] = useState<Member[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Supabase에서 데이터 가져오기
+  useEffect(() => {
+    async function fetchMembers() {
+      try {
+        setLoading(true);
+        const data = await getMembers();
+        setMembers(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching members:', err);
+        setError('데이터를 불러오는 중 오류가 발생했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchMembers();
+  }, []);
   
   // 샘플 사용자 데이터
   const users: User[] = [
@@ -181,6 +204,11 @@ export default function LeaderboardPage() {
     all_time: '전체',
   };
 
+  // 기본 아바타 이미지 경로 생성 함수
+  const getAvatarPath = (index: number) => {
+    return `/images/avatars/avatar${(index % 10) + 1}.svg`;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <header className="bg-white dark:bg-gray-800 shadow">
@@ -209,6 +237,104 @@ export default function LeaderboardPage() {
 
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">랭킹</h1>
+
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden mb-8">
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                  Supabase 멤버 랭킹
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  거리 기준 랭킹입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="p-8 text-center">
+              <p className="text-gray-600 dark:text-gray-400">데이터를 불러오는 중...</p>
+            </div>
+          ) : error ? (
+            <div className="p-8 text-center">
+              <p className="text-red-600 dark:text-red-400">{error}</p>
+            </div>
+          ) : members.length === 0 ? (
+            <div className="p-8 text-center">
+              <p className="text-gray-600 dark:text-gray-400">데이터가 없습니다.</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 dark:bg-gray-700">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      순위
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      사용자
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      부서
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      거리
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  {members.map((member, index) => (
+                    <tr key={member.id} className={index < 3 ? 'bg-blue-50 dark:bg-blue-900/20' : ''}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          {index < 3 ? (
+                            <span className={`
+                              flex items-center justify-center w-8 h-8 rounded-full text-white font-bold
+                              ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : 'bg-amber-700'}
+                            `}>
+                              {member.rank}
+                            </span>
+                          ) : (
+                            <span className="text-gray-600 dark:text-gray-400 font-medium ml-2">
+                              {member.rank}
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-10 w-10 relative">
+                            <Image 
+                              className="rounded-full"
+                              src={member.avatar || getAvatarPath(index)}
+                              alt={member.name}
+                              fill
+                              sizes="40px"
+                            />
+                          </div>
+                          <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900 dark:text-white">
+                              {member.name}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-600 dark:text-gray-400">{member.department}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          {member.distance.toFixed(1)}km
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden mb-8">
           <div className="p-6 border-b border-gray-200 dark:border-gray-700">
