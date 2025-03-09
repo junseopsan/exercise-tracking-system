@@ -28,7 +28,7 @@ export default function LeaderboardPage() {
       id: 'u1',
       name: '김철수',
       department: '개발팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar1.svg',
       stats: {
         distance: 42.5,
         missions: 8,
@@ -40,7 +40,7 @@ export default function LeaderboardPage() {
       id: 'u2',
       name: '이영희',
       department: '마케팅팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar2.svg',
       stats: {
         distance: 38.2,
         missions: 10,
@@ -52,7 +52,7 @@ export default function LeaderboardPage() {
       id: 'u3',
       name: '박지민',
       department: '디자인팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar3.svg',
       stats: {
         distance: 45.7,
         missions: 7,
@@ -64,7 +64,7 @@ export default function LeaderboardPage() {
       id: 'u4',
       name: '최민수',
       department: '인사팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar4.svg',
       stats: {
         distance: 30.1,
         missions: 5,
@@ -76,7 +76,7 @@ export default function LeaderboardPage() {
       id: 'u5',
       name: '정다은',
       department: '영업팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar5.svg',
       stats: {
         distance: 35.8,
         missions: 6,
@@ -88,7 +88,7 @@ export default function LeaderboardPage() {
       id: 'u6',
       name: '강현우',
       department: '개발팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar6.svg',
       stats: {
         distance: 28.3,
         missions: 4,
@@ -100,7 +100,7 @@ export default function LeaderboardPage() {
       id: 'u7',
       name: '윤서연',
       department: '마케팅팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar7.svg',
       stats: {
         distance: 33.6,
         missions: 9,
@@ -112,7 +112,7 @@ export default function LeaderboardPage() {
       id: 'u8',
       name: '임준호',
       department: '디자인팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar8.svg',
       stats: {
         distance: 40.2,
         missions: 11,
@@ -124,7 +124,7 @@ export default function LeaderboardPage() {
       id: 'u9',
       name: '한지원',
       department: '영업팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar9.svg',
       stats: {
         distance: 25.9,
         missions: 3,
@@ -136,7 +136,7 @@ export default function LeaderboardPage() {
       id: 'u10',
       name: '송민아',
       department: '인사팀',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/images/avatars/avatar10.svg',
       stats: {
         distance: 31.4,
         missions: 5,
